@@ -142,15 +142,15 @@ jobs:
 
     - name: Package OpenWrt Firmware
       if: ${{ env.compile_status }} == 'success' && !cancelled()
-      uses: unifreq/openwrt_packit@master
-      env:
-        OPENWRT_ARMVIRT: openwrt/bin/targets/*/*/immortalwrt-armsr-armv8-generic-rootfs.tar.gz
-        KERNEL_VERSION_NAME: 6.1.148
-        KERNEL_AUTO_LATEST: false
-        PACKAGE_SOC: s905d
-        WHOAMI: fightroad
-        SW_FLOWOFFLOAD: 0
-        SFE_FLOW: 0
+      uses: ophub/amlogic-s9xxx-openwrt@main
+      with:
+          openwrt_path: openwrt/output/*rootfs.tar.gz
+          openwrt_board: s905d
+          openwrt_kernel: 6.1.y
+          auto_kernel: true
+          kernel_repo: ophub/kernel
+          kernel_usage: stable
+          builder_name: false
        
     - name: Upload OpenWrt Firmware to Release
       uses: ncipollo/release-action@main
