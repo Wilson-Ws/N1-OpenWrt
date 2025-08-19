@@ -9,24 +9,29 @@ function git_sparse_clone() {
   cd .. && rm -rf $repodir
 }
 
+# Add the default password for the 'root' user（Change the empty password to 'password'）
+sed -i 's/root:::0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.::0:99999:7:::/g' package/base-files/files/etc/shadow
 # Default IP
-sed -i 's/192.168.1.1/192.168.2.2/g' package/base-files/files/bin/config_generate
-
+sed -i 's/192.168.1.1/192.168.31.2/g' package/base-files/files/bin/config_generate
+# 修改主机名
+sed -i 's/ImmortalWrt/OpenWrt/g' package/base-files/files/bin/config_generate
 
 # Add packages
 #添加科学上网源
-git clone --depth 1 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
-git clone --depth 1 https://github.com/jerrykuku/luci-app-argon-config package/luci-app-argon-config
 git clone --depth 1 https://github.com/ophub/luci-app-amlogic package/amlogic
+git clone --depth 1 https://github.com/nikkinikki-org/OpenWrt-nikki package/luci-app-nikki
+#git clone --depth 1 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
+#git clone --depth 1 https://github.com/jerrykuku/luci-app-argon-config package/luci-app-argon-config
 #git clone --depth 1 https://github.com/sirpdboy/luci-app-ddns-go package/ddnsgo
-git clone --depth 1 https://github.com/sbwml/luci-app-mosdns package/mosdns
+#git clone --depth 1 https://github.com/sbwml/luci-app-mosdns package/mosdns
 #git clone --depth 1 https://github.com/sbwml/luci-app-alist package/alist
 #git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall
 
 
 #删除库中的插件，使用自定义源中的包。
-rm -rf feeds/luci/themes/luci-theme-argon
-rm -rf feeds/luci/applications/luci-app-argon-config
+rm -rf package/luci-app-amlogic
+#rm -rf feeds/luci/themes/luci-theme-argon
+#rm -rf feeds/luci/applications/luci-app-argon-config
 #rm -rf feeds/luci/applications/luci-app-ddns-go
 #rm -rf feeds/packages/net/ddns-go
 #rm -rf feeds/packages/net/alist
