@@ -18,6 +18,7 @@ sed -i 's/ImmortalWrt/OpenWrt/g' package/base-files/files/bin/config_generate
 
 # Add packages
 #添加科学上网源
+rm -rf package/luci-app-amlogic
 git clone --depth 1 https://github.com/ophub/luci-app-amlogic package/amlogic
 git clone --depth 1 https://github.com/nikkinikki-org/OpenWrt-nikki package/luci-app-nikki
 #git clone --depth 1 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
@@ -29,7 +30,6 @@ git clone --depth 1 https://github.com/nikkinikki-org/OpenWrt-nikki package/luci
 
 
 #删除库中的插件，使用自定义源中的包。
-rm -rf package/luci-app-amlogic
 #rm -rf feeds/luci/themes/luci-theme-argon
 #rm -rf feeds/luci/applications/luci-app-argon-config
 #rm -rf feeds/luci/applications/luci-app-ddns-go
